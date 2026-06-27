@@ -1,0 +1,12 @@
+model,label,sqa_score,csqa_score,msqa_score,sqa_rank,csqa_rank,msqa_rank
+external-api/ModelHub-Gemini-3.1-Pro-high,Gemini-3.1,73.5,86.6,68.11324709913819,1,1,1
+external-api/QwenAPI-3.5-plus-thinking,Qwen-3.5+,48.2,84.3,39.484492219155996,2,2,8
+external-api/Modelhub-GPT-5.4-high-azure,GPT-5.4,45.9,76.4,50.3575097164078,3,7,2
+external-api/Doubao-2.0-pro-0215-medium.foreval,Doubao-Pro-M,45.8992,83.6467,39.6502126894558,4,3,7
+external-api/Doubao-2.0-pro-0215-high.foreval,Doubao-Pro-H,44.5,79.2,42.4267803256766,5,4,4
+external-api/GLM-5,GLM-5,35.608,77.3467,40.2960605160672,6,6,5
+external-api/OpenAI-GPT-5.2-high,GPT-5.2,33.8511,72.44,44.929104996076404,7,8,3
+external-api/Gemini-2.5-Flash,Gemini-2.5,31.8678,70.3267,40.2859561078458,8,9,6
+external-api/Doubao-2.0-lite-0215-high.foreval,Doubao-Lite,31.2529,79.0867,37.5301384258446,9,5,9
+external-api/Minimax-M2.7,Minimax-M2.7,14.8,52.6,27.5561493949627,11,11,10
+external-api/Minimax-M2.5,Minimax-M2.5,15.0069,60.24,24.5107703581888,10,10,11
