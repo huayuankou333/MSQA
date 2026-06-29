@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Loading helpers for the MMC-QA benchmark.
+"""Loading helpers for the MSQA benchmark.
 
-The public dataset ships as ``mmc_qa.jsonl`` (one JSON object per line). This
+The public dataset ships as ``msqa.jsonl`` (one JSON object per line). This
 module loads it from a local path or, if ``datasets`` is installed, straight
 from the Hugging Face Hub.
 
@@ -16,7 +16,7 @@ import json
 from pathlib import Path
 from typing import Dict, List, Optional
 
-HF_DATASET_ID = "m-a-p/MMC-QA"  # TODO: replace with the final Hugging Face id
+HF_DATASET_ID = "m-a-p/MSQA"
 
 REQUIRED_FIELDS = ("id", "language", "category", "question", "answer")
 
@@ -36,7 +36,7 @@ def load_dataset(
     language: Optional[str] = None,
     category: Optional[str] = None,
 ) -> List[Dict]:
-    """Load MMC-QA items, optionally filtered by language and/or category.
+    """Load MSQA items, optionally filtered by language and/or category.
 
     If ``path`` is given it is read directly (``.jsonl``). Otherwise the dataset
     is pulled from the Hugging Face Hub (requires ``pip install datasets``).

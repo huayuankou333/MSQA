@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Convert the raw MMC-QA workbook into the clean public release format.
+"""Convert the raw MSQA workbook into the clean public release format.
 
 This is the *authoring* tool used to produce the files distributed on the
 Hugging Face Hub and shipped under ``data/``. End users do not need to run it;
-they simply download the released ``mmc_qa.jsonl`` / ``mmc_qa.csv``.
+they simply download the released ``msqa.jsonl`` / ``msqa.csv``.
 
 Usage:
     python tools/build_dataset.py --input MSQA_expanded_v2.xlsx --outdir data
@@ -80,12 +80,12 @@ def build(input_path: Path, outdir: Path) -> None:
     outdir.mkdir(parents=True, exist_ok=True)
     records = out.to_dict(orient="records")
 
-    jsonl_path = outdir / "mmc_qa.jsonl"
+    jsonl_path = outdir / "msqa.jsonl"
     with jsonl_path.open("w", encoding="utf-8") as handle:
         for record in records:
             handle.write(json.dumps(record, ensure_ascii=False) + "\n")
 
-    csv_path = outdir / "mmc_qa.csv"
+    csv_path = outdir / "msqa.csv"
     with csv_path.open("w", encoding="utf-8-sig", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=PUBLIC_FIELDS)
         writer.writeheader()
@@ -101,7 +101,7 @@ def build(input_path: Path, outdir: Path) -> None:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Build the public MMC-QA dataset files.")
+    parser = argparse.ArgumentParser(description="Build the public MSQA dataset files.")
     parser.add_argument("--input", type=Path, required=True, help="Raw MSQA_expanded_v2.xlsx")
     parser.add_argument("--outdir", type=Path, default=Path("data"))
     return parser.parse_args()

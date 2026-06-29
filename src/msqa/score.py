@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Stage 3 - compute MMC-QA metrics (CO / NA / IN / CGA / F-score).
+"""Stage 3 - compute MSQA metrics (CO / NA / IN / CGA / F-score).
 
-Consumes the judged JSONL from ``mmc_qa.judge`` and reports, per model and per
+Consumes the judged JSONL from ``msqa.judge`` and reports, per model and per
 language / cultural dimension:
 
     CO   correct answers / all answers
@@ -16,7 +16,7 @@ every wrong answer is conservatively counted as IN, so CGA == CO and
 F == CO -- useful for a quick, API-free sanity check.
 
 Example:
-    python -m mmc_qa.score \
+    python -m msqa.score \
         --judged runs/gpt-5.2_pt.judged.jsonl \
         --judge-model gemini-3.1-pro \
         --output runs/gpt-5.2_pt.metrics.csv
@@ -35,9 +35,9 @@ from typing import Dict, List, Optional, Tuple
 
 from .llm_client import LLMClient
 
-LOGGER = logging.getLogger("mmc_qa.score")
+LOGGER = logging.getLogger("msqa.score")
 
-NA_PROMPT_TEMPLATE = """You are judging an MMC-QA benchmark answer that was already marked not fully correct.
+NA_PROMPT_TEMPLATE = """You are judging an MSQA benchmark answer that was already marked not fully correct.
 
 Classify it as exactly one label:
 - NA: The answer does not fully give the reference answer, but it also does not assert a wrong answer. This includes refusal, uncertainty, saying it cannot answer, or giving only non-committal context.
@@ -233,9 +233,9 @@ def run(args: argparse.Namespace) -> None:
 
 
 def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Compute MMC-QA CO/NA/IN/CGA/F-score metrics.")
+    parser = argparse.ArgumentParser(description="Compute MSQA CO/NA/IN/CGA/F-score metrics.")
     parser.add_argument("--judged", type=Path, required=True,
-                        help="Judged JSONL from mmc_qa.judge (may concatenate several models).")
+                        help="Judged JSONL from msqa.judge (may concatenate several models).")
     parser.add_argument("--output", type=Path, required=True,
                         help="Output stem; writes .csv, .per_language.csv, .per_category.csv, .json")
     parser.add_argument("--judge-model", default="gemini-3.1-pro",

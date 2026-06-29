@@ -14,19 +14,19 @@ language:
   - ms
   - id
   - es
-pretty_name: MMC-QA
+pretty_name: MSQA
 size_categories:
   - 1K<n<10K
 configs:
   - config_name: default
     data_files:
       - split: test
-        path: mmc_qa.jsonl
+        path: msqa.jsonl
 ---
 
-# MMC-QA Dataset Card
+# MSQA Dataset Card
 
-**MMC-QA** (Multilingual and Multicultural Question Answering) is a benchmark of
+**MSQA** (Multilingual and Multicultural Question Answering) is a benchmark of
 **1,064 natively sourced questions** measuring whether large language models
 possess genuine, locally grounded cultural knowledge — as opposed to fluency
 that merely *looks* culturally competent.
@@ -38,8 +38,8 @@ translated from English), and each has a single verifiable answer.
 
 | File | Description |
 |------|-------------|
-| `mmc_qa.jsonl` | The benchmark, one JSON object per line (UTF-8). |
-| `mmc_qa.csv`   | The same data as CSV (UTF-8 with BOM). |
+| `msqa.jsonl` | The benchmark, one JSON object per line (UTF-8). |
+| `msqa.csv`   | The same data as CSV (UTF-8 with BOM). |
 
 A single split is provided: **`test`** (1,064 items).
 
@@ -91,11 +91,11 @@ A single split is provided: **`test`** (1,064 items).
 ```python
 # From the Hugging Face Hub
 from datasets import load_dataset
-ds = load_dataset("m-a-p/MMC-QA", split="test")
+ds = load_dataset("m-a-p/MSQA", split="test")
 
 # From a local file (this repo)
-from mmc_qa.data import load_dataset
-items = load_dataset(path="data/mmc_qa.jsonl", language="pt-PT")
+from msqa.data import load_dataset
+items = load_dataset(path="data/msqa.jsonl", language="pt-PT")
 ```
 
 ## Provenance

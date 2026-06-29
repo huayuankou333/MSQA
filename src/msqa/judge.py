@@ -2,13 +2,13 @@
 """Stage 2 - judge generated answers for semantic correctness.
 
 An LLM judge compares each candidate answer against the gold answer and returns
-a binary verdict (Yes/No). Reads the JSONL produced by ``mmc_qa.generate`` and
+a binary verdict (Yes/No). Reads the JSONL produced by ``msqa.generate`` and
 writes a new JSONL with the verdict attached to every record. Resumable:
 records that already carry a verdict are skipped.
 
 Example:
-    export MMCQA_JUDGE_API_KEY=...  MMCQA_JUDGE_BASE_URL=...
-    python -m mmc_qa.judge \
+    export MSQA_JUDGE_API_KEY=...  MSQA_JUDGE_BASE_URL=...
+    python -m msqa.judge \
         --responses runs/gpt-5.2_pt.jsonl \
         --judge-model gemini-3.1-pro \
         --output runs/gpt-5.2_pt.judged.jsonl
@@ -29,7 +29,7 @@ from typing import Dict, List, Optional
 
 from .llm_client import LLMClient
 
-LOGGER = logging.getLogger("mmc_qa.judge")
+LOGGER = logging.getLogger("msqa.judge")
 _THREAD_LOCAL = threading.local()
 
 
@@ -219,9 +219,9 @@ def run(args: argparse.Namespace) -> None:
 
 
 def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Judge MMC-QA answers for correctness.")
+    parser = argparse.ArgumentParser(description="Judge MSQA answers for correctness.")
     parser.add_argument("--responses", type=Path, required=True,
-                        help="JSONL produced by mmc_qa.generate.")
+                        help="JSONL produced by msqa.generate.")
     parser.add_argument("--output", type=Path, required=True, help="Judged JSONL output path.")
     parser.add_argument("--judge-model", default="gemini-3.1-pro", help="LLM judge model id.")
     parser.add_argument("--workers", type=int, default=4)

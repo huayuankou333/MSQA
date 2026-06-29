@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mmc-qa"
+name = "msqa"
 version = "0.1.0"
-description = "Evaluation toolkit for the MMC-QA multilingual & multicultural QA benchmark"
+description = "Evaluation toolkit for the MSQA multilingual & multicultural QA benchmark"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "CC-BY-4.0" }
@@ -21,9 +21,9 @@ dependencies = [
 hub = ["datasets>=2.14"]
 
 [project.scripts]
-mmcqa-generate = "mmc_qa.generate:main"
-mmcqa-judge = "mmc_qa.judge:main"
-mmcqa-score = "mmc_qa.score:main"
+msqa-generate = "msqa.generate:main"
+msqa-judge = "msqa.judge:main"
+msqa-score = "msqa.score:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

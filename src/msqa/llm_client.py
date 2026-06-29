@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unified, OpenAI-compatible LLM client used across the MMC-QA pipeline.
+"""Unified, OpenAI-compatible LLM client used across the MSQA pipeline.
 
 All three stages of the pipeline (generation, judging, scoring) talk to models
 through a single chat-completions interface. Most commercial and open-weight
@@ -8,14 +8,14 @@ generation models *and* the LLM judge.
 
 No secrets live in source. Configure credentials with environment variables:
 
-    export MMCQA_API_KEY=sk-...                 # required
-    export MMCQA_BASE_URL=https://api.openai.com/v1   # or any OAI-compatible gateway
+    export MSQA_API_KEY=sk-...                 # required
+    export MSQA_BASE_URL=https://api.openai.com/v1   # or any OAI-compatible gateway
 
 You can also keep per-purpose overrides (handy when the judge lives on a
 different gateway than the models under test):
 
-    export MMCQA_JUDGE_API_KEY=...
-    export MMCQA_JUDGE_BASE_URL=...
+    export MSQA_JUDGE_API_KEY=...
+    export MSQA_JUDGE_BASE_URL=...
 
 For backward compatibility with the original release scripts, GEMINI_API_KEY /
 GEMINI_BASE_URL and OPENAI_API_KEY / OPENAI_BASE_URL are also honored.
@@ -50,7 +50,7 @@ class LLMClient:
     api_key, base_url:
         Explicit credentials. When omitted, they are read from the environment
         (see module docstring). ``purpose="judge"`` additionally consults the
-        ``MMCQA_JUDGE_*`` variables first, so the judge can use a separate
+        ``MSQA_JUDGE_*`` variables first, so the judge can use a separate
         gateway from the models under test.
     """
 
@@ -62,23 +62,23 @@ class LLMClient:
     ) -> None:
         if purpose == "judge":
             api_key = api_key or _first_env(
-                "MMCQA_JUDGE_API_KEY", "MMCQA_API_KEY", "GEMINI_API_KEY", "OPENAI_API_KEY"
+                "MSQA_JUDGE_API_KEY", "MSQA_API_KEY", "GEMINI_API_KEY", "OPENAI_API_KEY"
             )
             base_url = base_url or _first_env(
-                "MMCQA_JUDGE_BASE_URL", "MMCQA_BASE_URL", "GEMINI_BASE_URL", "OPENAI_BASE_URL"
+                "MSQA_JUDGE_BASE_URL", "MSQA_BASE_URL", "GEMINI_BASE_URL", "OPENAI_BASE_URL"
             )
         else:
             api_key = api_key or _first_env(
-                "MMCQA_API_KEY", "OPENAI_API_KEY", "GEMINI_API_KEY"
+                "MSQA_API_KEY", "OPENAI_API_KEY", "GEMINI_API_KEY"
             )
             base_url = base_url or _first_env(
-                "MMCQA_BASE_URL", "OPENAI_BASE_URL", "GEMINI_BASE_URL"
+                "MSQA_BASE_URL", "OPENAI_BASE_URL", "GEMINI_BASE_URL"
             )
 
         if not api_key:
             raise ValueError(
-                "Missing API key. Set MMCQA_API_KEY (or pass api_key=...). "
-                "See mmc_qa/llm_client.py for all accepted environment variables."
+                "Missing API key. Set MSQA_API_KEY (or pass api_key=...). "
+                "See msqa/llm_client.py for all accepted environment variables."
             )
 
         self.api_key = api_key

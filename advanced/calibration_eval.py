@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Judge MMC-QA model answers and compute confidence calibration summaries.
+"""Judge MSQA model answers and compute confidence calibration summaries.
 
 This script is the cleaned release version of the internal calibration
 evaluation script. It intentionally contains no API keys, private proxy URLs, or
@@ -109,13 +109,13 @@ class JudgeClient:
     """Direct HTTP client for OpenAI-compatible chat-completions endpoints."""
 
     def __init__(self, api_key: Optional[str] = None, base_url: Optional[str] = None) -> None:
-        self.api_key = api_key or os.getenv("MMCQA_JUDGE_API_KEY") or os.getenv("GEMINI_API_KEY")
+        self.api_key = api_key or os.getenv("MSQA_JUDGE_API_KEY") or os.getenv("GEMINI_API_KEY")
         if not self.api_key:
-            raise ValueError("Missing judge API key. Set MMCQA_JUDGE_API_KEY / GEMINI_API_KEY or pass --api-key.")
+            raise ValueError("Missing judge API key. Set MSQA_JUDGE_API_KEY / GEMINI_API_KEY or pass --api-key.")
 
         self.base_url = normalize_base_url(
             base_url
-            or os.getenv("MMCQA_JUDGE_BASE_URL")
+            or os.getenv("MSQA_JUDGE_BASE_URL")
             or os.getenv("GEMINI_BASE_URL", DEFAULT_GEMINI_BASE_URL)
         )
         self.session = requests.Session()
@@ -164,7 +164,7 @@ class JudgeClient:
 def parse_args() -> argparse.Namespace:
     script_dir = Path(__file__).resolve().parent
     parser = argparse.ArgumentParser(
-        description="Use an LLM judge to score MMC-QA responses and compute calibration metrics."
+        description="Use an LLM judge to score MSQA responses and compute calibration metrics."
     )
     parser.add_argument(
         "--workbook",

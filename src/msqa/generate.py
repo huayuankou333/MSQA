@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stage 1 - generate model answers for MMC-QA questions.
+"""Stage 1 - generate model answers for MSQA questions.
 
 Each question is sent to the model under test ``--runs`` times (default 1; use
 5 to reproduce the Best/Worst-of-N and stability analyses). Results stream to a
@@ -7,9 +7,9 @@ JSONL file and the run is fully resumable: re-running skips (id, run) pairs that
 already have an answer.
 
 Example:
-    export MMCQA_API_KEY=...  MMCQA_BASE_URL=...
-    python -m mmc_qa.generate \
-        --data data/mmc_qa.jsonl --language pt-PT \
+    export MSQA_API_KEY=...  MSQA_BASE_URL=...
+    python -m msqa.generate \
+        --data data/msqa.jsonl --language pt-PT \
         --model gpt-5.2 --runs 5 \
         --output runs/gpt-5.2_pt.jsonl
 """
@@ -29,7 +29,7 @@ from typing import Dict, List, Optional
 from .data import load_dataset
 from .llm_client import LLMClient
 
-LOGGER = logging.getLogger("mmc_qa.generate")
+LOGGER = logging.getLogger("msqa.generate")
 _THREAD_LOCAL = threading.local()
 
 
@@ -131,9 +131,9 @@ def run(args: argparse.Namespace) -> None:
 
 
 def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate MMC-QA model answers.")
+    parser = argparse.ArgumentParser(description="Generate MSQA model answers.")
     parser.add_argument("--data", type=Path, default=None,
-                        help="Local mmc_qa.jsonl. Omit to pull from the Hugging Face Hub.")
+                        help="Local msqa.jsonl. Omit to pull from the Hugging Face Hub.")
     parser.add_argument("--language", default=None, help="Filter to one language, e.g. pt-PT.")
     parser.add_argument("--category", default=None, help="Filter to one cultural dimension.")
     parser.add_argument("--model", required=True, help="Model id served by your endpoint.")

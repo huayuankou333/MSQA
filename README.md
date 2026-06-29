@@ -1,8 +1,8 @@
-# MMC-QA
+# MSQA
 
 **A Natively Sourced Multilingual and Multicultural Question Answering Benchmark**
 
-MMC-QA is a benchmark of **1,064 natively sourced questions** spanning **11 language
+MSQA is a benchmark of **1,064 natively sourced questions** spanning **11 language
 groups**, **5 cultural dimensions**, and three difficulty tiers. Unlike translated
 benchmarks (e.g., translating MMLU), every question is grounded in *locally
 sourced* cultural knowledge, so a model cannot succeed by transferring
@@ -14,10 +14,10 @@ This repository contains the **dataset** and the **evaluation toolkit** used in
 the paper: a clean, three-stage pipeline to reproduce our numbers or evaluate
 your own models.
 
-- 📄 Paper: *MMC-QA: A Natively Sourced Multilingual and Multicultural Question Answering Benchmark*
-- 💻 Code: <https://github.com/huayuankou333/MMC-QA>
-- 🌐 Project website: <https://huayuankou333.github.io/MMC-QA>
-- 🤗 Dataset: <https://huggingface.co/datasets/m-a-p/MMC-QA>
+- 📄 Paper: *MSQA: A Natively Sourced Multilingual and Multicultural Question Answering Benchmark*
+- 💻 Code: <https://github.com/huayuankou333/MSQA>
+- 🌐 Project website: <https://huayuankou333.github.io/MSQA>
+- 🤗 Dataset: <https://huggingface.co/datasets/m-a-p/MSQA>
 
 ---
 
@@ -38,10 +38,10 @@ full dataset card and field schema.
 ## Installation
 
 ```bash
-git clone https://github.com/huayuankou333/MMC-QA.git
-cd MMC-QA
+git clone https://github.com/huayuankou333/MSQA.git
+cd MSQA
 python -m venv .venv && source .venv/bin/activate
-pip install -e .            # installs the mmc_qa package + CLIs
+pip install -e .            # installs the msqa package + CLIs
 # optional, to stream the dataset from the Hugging Face Hub:
 pip install -e ".[hub]"
 ```
@@ -58,19 +58,19 @@ The first step is always to obtain the data. Two options:
 
 ```bash
 # As files:
-huggingface-cli download m-a-p/MMC-QA --repo-type dataset --local-dir data
+huggingface-cli download m-a-p/MSQA --repo-type dataset --local-dir data
 # ...or directly in Python (pip install datasets):
-python -c "from datasets import load_dataset; load_dataset('m-a-p/MMC-QA', split='test')"
+python -c "from datasets import load_dataset; load_dataset('m-a-p/MSQA', split='test')"
 ```
 
 **B. Use the copy shipped in this repo**
 
-A ready-to-use copy lives at [`data/mmc_qa.jsonl`](data/mmc_qa.jsonl) (and
-`data/mmc_qa.csv`). All commands below default to this local file via
-`--data data/mmc_qa.jsonl`. Omitting `--data` makes the tools pull from the Hub
+A ready-to-use copy lives at [`data/msqa.jsonl`](data/msqa.jsonl) (and
+`data/msqa.csv`). All commands below default to this local file via
+`--data data/msqa.jsonl`. Omitting `--data` makes the tools pull from the Hub
 instead.
 
-Each line of `mmc_qa.jsonl` looks like:
+Each line of `msqa.jsonl` looks like:
 
 ```json
 {
@@ -96,12 +96,12 @@ All three stages talk to models through an **OpenAI-compatible** chat endpoint
 **no keys live in the code**:
 
 ```bash
-export MMCQA_API_KEY="sk-..."                       # key for the models under test
-export MMCQA_BASE_URL="https://api.openai.com/v1"   # any OpenAI-compatible gateway
+export MSQA_API_KEY="sk-..."                       # key for the models under test
+export MSQA_BASE_URL="https://api.openai.com/v1"   # any OpenAI-compatible gateway
 
 # Optional: run the LLM judge on a separate gateway
-export MMCQA_JUDGE_API_KEY="..."
-export MMCQA_JUDGE_BASE_URL="https://generativelanguage.googleapis.com/v1beta/openai"
+export MSQA_JUDGE_API_KEY="..."
+export MSQA_JUDGE_BASE_URL="https://generativelanguage.googleapis.com/v1beta/openai"
 ```
 
 `GEMINI_API_KEY` / `GEMINI_BASE_URL` and `OPENAI_API_KEY` / `OPENAI_BASE_URL`
@@ -117,8 +117,8 @@ writes JSONL and is fully resumable (re-run to continue after an interruption).
 ### 3.1 Generate answers
 
 ```bash
-python -m mmc_qa.generate \
-    --data data/mmc_qa.jsonl \
+python -m msqa.generate \
+    --data data/msqa.jsonl \
     --model gpt-5.2 \
     --output runs/gpt-5.2.jsonl \
     --workers 8
@@ -132,7 +132,7 @@ question 5× for the stability / Best-of-N analyses), `--temperature`, `--max-to
 An LLM judge compares each answer to the gold answer and returns Yes/No.
 
 ```bash
-python -m mmc_qa.judge \
+python -m msqa.judge \
     --responses runs/gpt-5.2.jsonl \
     --judge-model gemini-3.1-pro \
     --output runs/gpt-5.2.judged.jsonl \
@@ -142,7 +142,7 @@ python -m mmc_qa.judge \
 ### 3.3 Score (CO / NA / IN / CGA / F-score)
 
 ```bash
-python -m mmc_qa.score \
+python -m msqa.score \
     --judged runs/gpt-5.2.judged.jsonl \
     --judge-model gemini-3.1-pro \
     --output runs/gpt-5.2.metrics
@@ -184,12 +184,12 @@ every wrong answer as IN (then F == CO).
 ## Repository layout
 
 ```
-MMC-QA/
+MSQA/
 ├── data/
-│   ├── mmc_qa.jsonl          # the benchmark (1,064 items)
-│   ├── mmc_qa.csv
+│   ├── msqa.jsonl          # the benchmark (1,064 items)
+│   ├── msqa.csv
 │   └── README.md             # dataset card + field schema
-├── src/mmc_qa/
+├── src/msqa/
 │   ├── data.py               # dataset loader (local JSONL or HF Hub)
 │   ├── llm_client.py         # OpenAI-compatible client (models + judge)
 │   ├── generate.py           # stage 1
@@ -209,8 +209,8 @@ MMC-QA/
 ## Citation
 
 ```bibtex
-@article{mmcqa,
-  title  = {MMC-QA: A Natively Sourced Multilingual and Multicultural Question Answering Benchmark},
+@article{msqa,
+  title  = {MSQA: A Natively Sourced Multilingual and Multicultural Question Answering Benchmark},
   author = {Chen, Xianru and Huang, Yukai and Chen, Mingxiang and Lei, Xinping and
             Deng, Fangbing and Chen, Jin and Zhang, Ge and Huang, Wenhao and Liu, Jiaheng},
   year   = {2026}
