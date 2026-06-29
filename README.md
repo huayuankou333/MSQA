@@ -1,6 +1,6 @@
 # MSQA
 
-**A Natively Sourced Multilingual and Multicultural Question Answering Benchmark**
+**A Natively Sourced Multilingual and Multicultural SimpleQA Benchmark**
 
 MSQA is a benchmark of **1,064 natively sourced questions** spanning **11 language
 groups**, **5 cultural dimensions**, and three difficulty tiers. Unlike translated
@@ -14,7 +14,7 @@ This repository contains the **dataset** and the **evaluation toolkit** used in
 the paper: a clean, three-stage pipeline to reproduce our numbers or evaluate
 your own models.
 
-- 📄 Paper: *MSQA: A Natively Sourced Multilingual and Multicultural Question Answering Benchmark*
+- 📄 Paper: *MSQA: A Natively Sourced Multilingual and Multicultural SimpleQA Benchmark*
 - 💻 Code: <https://github.com/huayuankou333/MSQA>
 - 🌐 Project website: <https://huayuankou333.github.io/MSQA>
 - 🤗 Dataset: <https://huggingface.co/datasets/m-a-p/MSQA>
@@ -210,7 +210,7 @@ MSQA/
 
 ```bibtex
 @article{msqa,
-  title  = {MSQA: A Natively Sourced Multilingual and Multicultural Question Answering Benchmark},
+  title  = {MSQA: A Natively Sourced Multilingual and Multicultural SimpleQA Benchmark},
   author = {Chen, Xianru and Huang, Yukai and Chen, Mingxiang and Lei, Xinping and
             Deng, Fangbing and Chen, Jin and Zhang, Ge and Huang, Wenhao and Liu, Jiaheng},
   year   = {2026}

@@ -26,7 +26,7 @@ configs:
 
 # MSQA Dataset Card
 
-**MSQA** (Multilingual and Multicultural Question Answering) is a benchmark of
+**MSQA** (Multilingual and Multicultural SimpleQA) is a benchmark of
 **1,064 natively sourced questions** measuring whether large language models
 possess genuine, locally grounded cultural knowledge — as opposed to fluency
 that merely *looks* culturally competent.
