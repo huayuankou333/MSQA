@@ -17,7 +17,7 @@ your own models.
 - 📄 Paper: <https://arxiv.org/abs/2607.00724>
 - 💻 Code: <https://github.com/huayuankou333/MSQA>
 - 🌐 Project website: <https://huayuankou333.github.io/MSQA>
-- 🤗 Dataset: <https://huggingface.co/datasets/m-a-p/MSQA>
+- 🤗 Dataset: <https://huggingface.co/datasets/m-a-p/MSQA> *(coming soon)*
 
 ---
 
@@ -51,6 +51,11 @@ Requires Python ≥ 3.9.
 ---
 
 ## Step 1 — Get the dataset
+
+> 🚧 **The dataset is not yet publicly released — coming soon.** The download
+> options below will work once it is published; until then the evaluation
+> toolkit can be run on your own JSONL in the same schema (see
+> [`data/README.md`](data/README.md)).
 
 The first step is always to obtain the data. Two options:
 
